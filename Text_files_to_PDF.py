@@ -1,3 +1,4 @@
+    # Vamos a crear un programa que dado unos texto en formato txt los vamoos a agrupar en un documento pdf con una página para cada documento de texto.
 from fpdf import FPDF
 import glob
 from pathlib import Path
@@ -32,9 +33,13 @@ for filepath in filepaths:
     with open(filepath, "r") as file:
         document_content = file.read()  # y guardando en esa variable el contenido de cada texto.
     # Add the text file content to the PDf
-    pdf.set_font(family="Arial", size=14)
+    pdf.set_font(family="Times", style= "I", size=12)
     pdf.set_text_color(C, C, C)
     pdf.multi_cell(w=0, h=6, txt=document_content, align="J")
 
+    pdf.ln(176)
+    pdf.set_font(family="Times", style="B", size=10)
+    pdf.set_text_color(C, C, C)
+    pdf.cell(w=0, h=0, txt=str(pdf.page_no()), align="C")
 # Produce the PDF
 pdf.output("Text_files_to_PDF.pdf")
